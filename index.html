@@ -1,23 +1,485 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "KT인터넷 무약정 가입 서비스",
+    "provider": {
+      "@type": "Organization",
+      "name": "KT인터넷 가입센터",
+      "url": "https://yourdomain.com",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+82-2-123-4567",
+        "contactType": "customer service"
+      }
+    },
+    "areaServed": "대한민국 전국",
+    "description": "KT 초고속 인터넷 무약정 상품의 장점과 단점, 가격 비교, 2026년 최신 가입 혜택을 상세히 안내합니다. 약정 없이 자유롭게 이용하려는 고객을 위한 전문적인 정보를 제공합니다.",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "KT인터넷 무약정 요금제 안내",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "KT 기가인터넷 무약정 (1Gbps)"
+          },
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "price": "50000",
+            "priceCurrency": "KRW",
+            "description": "초고속 인터넷 1Gbps 무약정 요금제"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "KT 인터넷 베이직 무약정 (500Mbps)"
+          },
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "price": "40000",
+            "priceCurrency": "KRW",
+            "description": "500Mbps 인터넷 무약정 요금제"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "KT 인터넷 라이트 무약정 (100Mbps)"
+          },
+          "priceSpecification": {
+type: "PriceSpecification",
+            "price": "30000",
+            "priceCurrency": "KRW",
+            "description": "100Mbps 인터넷 무약정 요금제"
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+  <!-- Google Fonts import -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- CSS Style for layout and color scheme -->
+  <style>
+    /* Reset and Typography */
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f8fa; /* Soft light blue/gray background */
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #0077c2; /* KT-like blue */
+      color: #fff;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.25rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+      font-weight: 300;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffde7d; /* Highlight yellow */
+    }
+
+    /* Main Content Layout */
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-radius: 10px;
+    }
+    section {
+      padding: 1rem 0;
+    }
+    h2 {
+      color: #1a1a1a;
+      margin-top: 2rem;
+      font-size: 1.8rem;
+      border-bottom: 2px solid #a6dcef;
+      padding-bottom: 0.3rem;
+      font-weight: 600;
+    }
+    h3 {
+      color: #0077c2; /* KT blue for subheadings */
+      margin-top: 1.5rem;
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
+    p, ul, table {
+      margin-bottom: 1rem;
+    }
+    ul {
+      padding-left: 1.5rem;
+      list-style-type: disc;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Pricing Table */
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+    .pricing-table th,
+    .pricing-table td {
+      padding: 1rem;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    .pricing-table th {
+      background-color: #e0f2f7; /* Light blue header */
+      color: #0077c2;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .pricing-table td {
+      background-color: #fff;
+    }
+
+    /* Call to Action Button */
+    .cta-button {
+      display: block;
+      background-color: #ffde7d; /* Highlight yellow */
+      color: #1a1a1a;
+      font-weight: 700;
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+      text-decoration: none;
+      margin: 1.5rem auto;
+      transition: background-color 0.3s;
+      width: fit-content;
+    }
+    .cta-button:hover {
+      background-color: #ffc94d;
+    }
+
+    /* Keyword Tags */
+    .keyword-tags {
+      margin: 1.5rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-top: 1px dotted #ccc;
+      padding-top: 1rem;
+    }
+    .keyword-tags a {
+      background-color: #dcedc1; /* Soft green tag color */
+      color: #386641;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    .keyword-tags a:hover {
+      background-color: #b7cc7e;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #555;
+      background-color: #e5e5e5;
+      margin-top: 2rem;
+    }
+
+    /* FAQ Accordion */
+    dl dt {
+      font-weight: 700;
+      margin-top: 1rem;
+      cursor: pointer;
+      color: #0077c2;
+      padding: 0.75rem;
+      border-bottom: 1px solid #eee;
+      position: relative;
+    }
+    dl dt:before {
+      content: "+";
+      position: absolute;
+      right: 1rem;
+      transition: transform 0.3s;
+    }
+    dl dt.active:before {
+      content: "-";
+      transform: rotate(180deg);
+    }
+    dl dd {
+      margin-left: 1rem;
+      padding: 0.75rem;
+      border-left: 3px solid #ffde7d;
+      margin-bottom: 0.5rem;
+      display: none;
+    }
+    dl dt.active + dd {
+      display: block;
+    }
+    
+    /* Image Styling */
+    .content-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Special highlight box */
+    .highlight-box {
+      background-color: #f7f9fc;
+      border: 1px solid #e0eaf4;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      line-height: 1.8;
+    }
+    .highlight-box p {
+      margin: 0;
+    }
+    .highlight-box h4 {
+      margin-top: 0;
+      color: #0077c2;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>KT인터넷 무약정 – 2026년 신규 가입 혜택, 가격 비교 및 후기</h1>
+    <p>약정에 얽매이지 않고 자유롭게 인터넷을 이용하세요. 전국 어디서나 KT의 안정적인 초고속 인터넷을 경험할 수 있습니다.</p>
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+      <ul>
+        <li><a href="#무약정소개">무약정 서비스 소개</a></li>
+        <li><a href="#요금제비교">요금제 및 가격 분석</a></li>
+        <li><a href="#지역별가입">지역별 가입 안내</a></li>
+        <li><a href="#장점단점">장단점 비교</a></li>
+        <li><a href="#고객후기">고객 후기 및 FAQ</a></li>
+        <li><a href="#가입문의">가입 문의</a></li>
+      </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  </header>
+
+  <main>
+    <section id="무약정소개">
+      <h2>1. KT인터넷 무약정 서비스, 왜 필요할까요?</h2>
+      <img src="https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="노트북으로 인터넷을 사용하는 사람" class="content-image">
+      <p>최근 1인 가구 증가와 잦은 이사로 인해 약정 기간에 대한 부담을 느끼는 소비자들이 늘어나고 있습니다. 특히 서울, 경기도 등 수도권 지역의 원룸이나 오피스텔에 거주하는 분들은 2~3년의 의무 사용 기간이 부담스러울 수 있습니다. <strong>KT인터넷 무약정</strong> 서비스는 이러한 소비자들의 니즈를 충족시키기 위해 약정 기간 없이 자유롭게 인터넷을 사용할 수 있도록 제공하는 상품입니다.</p>
+      <p>무약정 인터넷은 약정 할인(결합 할인)이 적용되지 않아 정가 요금으로 이용하게 되지만, 중도 해지 시 위약금이 발생하지 않는다는 가장 큰 <strong>장점</strong>이 있습니다. 2026년 현재, 많은 소비자들이 단기 거주지(예: 대학교 기숙사, 단기 임대 주택)에서 인터넷 가입을 원할 때 이 서비스를 우선적으로 고려하고 있습니다.</p>
+      <div class="highlight-box">
+        <h4>무약정 인터넷이 적합한 고객층</h4>
+        <ul>
+          <li><strong>잦은 이사 계획이 있는 분:</strong> 서울, 인천, 부산, 대구 등 대도시의 유동 인구에게 적합합니다.</li>
+          <li><strong>단기 거주자:</strong> 1년 미만 단기 임대나 해외 출장 후 복귀하여 잠시 거주하는 경우.</li>
+          <li><strong>위약금 걱정 없이 자유롭게 해지하고 싶은 분:</strong> 언제든지 원하는 시점에 해지 가능합니다.</li>
+          <li><strong>신규 가입 현금지원보다는 월 요금 부담을 우선 고려하는 분:</strong> 장기 약정 대비 초기 현금 혜택은 적지만, 월별 비용 관리가 용이합니다.</li>
+        </ul>
+      </div>
+      <p>이러한 유연성은 특히 젊은 세대나 1인 가구에게 큰 매력으로 다가오며, 최근 <strong>KT인터넷 무약정 후기</strong>를 찾아보는 고객들의 수가 급증하는 추세입니다. 본 페이지에서는 <strong>KT인터넷 무약정</strong>의 상세 요금제, <strong>가격 비교</strong>, <strong>장단점</strong>, 그리고 전국 어디서든 쉽게 <strong>가입</strong>하는 방법을 안내해 드립니다.</p>
+    </section>
+
+    <section id="요금제비교">
+      <h2>2. KT인터넷 무약정 요금제 및 가격 분석: 약정 상품과의 차이점</h2>
+      <p><strong>KT인터넷 무약정 상품</strong>은 일반 약정 상품과 요금제 구성이 다릅니다. 약정을 맺지 않기 때문에 약정 기간 동안의 할인이 적용되지 않으며, 사은품이나 <strong>현금지원</strong> 금액도 일반 약정 가입에 비해 적거나 없을 수 있습니다. 하지만 중도 해지 위약금 부담이 없다는 점이 가장 큰 <strong>차이점</strong>입니다.</p>
+      <p>아래 표는 2026년 현재 KT에서 제공하는 대표적인 인터넷 속도별 무약정 예상 <strong>비용</strong>과 일반 약정 요금(3년 약정 기준)을 비교한 것입니다. <strong>가격</strong>은 설치 환경(아파트, 주택 등)이나 결합 상품 유무에 따라 일부 변동될 수 있습니다.</p>
+
+      <h3>KT 인터넷 무약정 vs. 3년 약정 비교표 (2026년 기준)</h3>
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>무약정 요금 (월 예상 비용)</th>
+            <th>3년 약정 요금 (월 할인 비용)</th>
+            <th>중도 해지 위약금 유무</th>
+            <th>초기 가입 혜택(사은품/현금지원)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>100Mbps (인터넷 슬림)</strong></td>
+            <td>30,000 ~ 35,000원</td>
+            <td>22,000 ~ 27,000원</td>
+            <td><strong>없음</strong></td>
+            <td>소액 또는 없음</td>
+          </tr>
+          <tr>
+            <td><strong>500Mbps (인터넷 베이직)</strong></td>
+            <td>40,000 ~ 45,000원</td>
+            <td>33,000 ~ 38,000원</td>
+            <td><strong>없음</strong></td>
+            <td>소액 또는 없음</td>
+          </tr>
+          <tr>
+            <td><strong>1Gbps (인터넷 기가)</strong></td>
+            <td>50,000 ~ 55,000원</td>
+            <td>38,000 ~ 43,000원</td>
+            <td><strong>없음</strong></td>
+            <td>소액 또는 없음</td>
+          </tr>
+          <tr>
+            <td><strong>결합 상품 (인터넷+TV)</strong></td>
+            <td>별도 문의</td>
+            <td>할인율 가장 높음</td>
+            <td><strong>있음</strong></td>
+            <td>고액 혜택 (현금/상품권)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="small-info"><em>* 상기 <strong>금액</strong>은 부가세 포함 기준이며, 2026년도 통신사 정책에 따라 변동될 수 있습니다. 정확한 <strong>견적</strong>은 상담을 통해 확인하세요.</em></p>
+
+      <h3>합리적인 무약정 가입을 위한 꿀팁: <strong>저렴한곳</strong> 찾기</h3>
+      <p>KT인터넷 무약정 상품은 약정 상품처럼 <strong>현금지원</strong>이나 고액의 <strong>사은품</strong>을 제공하는 경우가 많지 않습니다. 그러나 일부 <strong>전문 업체</strong>나 대리점을 통해 <strong>신규 가입</strong> 시 소정의 혜택을 받을 수 있습니다. <strong>무약정 현금지원</strong>을 원하는 경우, 여러 <strong>업체</strong>의 <strong>비교</strong> 견적을 받아보는 것이 좋습니다.</p>
+      <p>무약정은 월 요금 자체는 약정보다 높지만, 단기로 사용하고 해지할 경우 위약금이 없기 때문에 오히려 <strong>총 비용</strong> 면에서 <strong>저렴한곳</strong>이 될 수 있습니다. 특히 1년 미만 사용 예정이라면 무조건 <strong>무약정 가입</strong>을 추천합니다.</p>
+    </section>
+    
+    <section id="지역별가입">
+        <h2>3. 전국 지역별 KT인터넷 무약정 가입 안내: 서비스 가능 지역 확인</h2>
+        <img src="https://images.pexels.com/photos/10313833/pexels-photo-10313833.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="도시 야경과 인터넷 통신망 이미지" class="content-image">
+        <p>KT는 대한민국을 대표하는 통신사로서 <strong>전국 지역</strong>에 광범위한 통신망을 구축하고 있습니다. 따라서 <strong>KT인터넷 무약정</strong> 서비스 역시 전국 대부분의 지역에서 이용 가능합니다. <strong>서울</strong>, <strong>인천</strong>, <strong>경기도</strong> 등 수도권 지역은 물론, <strong>부산광역시</strong>, <strong>대구광역시</strong>, <strong>광주광역시</strong>, <strong>대전광역시</strong>, <strong>울산광역시</strong>, <strong>세종특별자치시</strong> 등 주요 광역시에서도 고품질의 서비스를 제공합니다.</p>
+        <p>특히 <strong>수도권</strong>(<strong>수원</strong>, <strong>고양</strong>, <strong>용인</strong>, <strong>성남</strong>, <strong>화성</strong>, <strong>안산</strong>, <strong>안양</strong>, <strong>평택</strong>, <strong>김포</strong>, <strong>광명</strong>, <strong>군포</strong> 등)은 인구 밀집도가 높아 인터넷 설치가 용이하며, <strong>강원도</strong>(<strong>원주</strong>, <strong>춘천</strong>, <strong>강릉</strong>), <strong>충청도</strong>(<strong>천안</strong>, <strong>청주</strong>, <strong>아산</strong>, <strong>공주</strong>), <strong>경상도</strong>(<strong>창원</strong>, <strong>김해</strong>, <strong>포항</strong>, <strong>구미</strong>, <strong>양산</strong>), <strong>전라도</strong>(<strong>전주</strong>, <strong>익산</strong>, <strong>순천</strong>, <strong>여수</strong>) 등 지방 주요 도시에서도 <strong>KT 인터넷 가입</strong>이 활발합니다.</p>
+        <p><strong>제주도</strong>(<strong>제주시</strong>, <strong>서귀포시</strong>)를 포함한 도서 지역 일부에서도 KT의 광범위한 커버리지를 통해 무약정 인터넷을 신청할 수 있습니다. <strong>지역별</strong> 상세 설치 가능 여부 및 <strong>설치비용</strong>, <strong>추가 혜택</strong>은 상담을 통해 즉시 확인 가능합니다.</p>
+        <div class="highlight-box">
+            <h4>주요 지역별 무약정 인터넷 가입 유의사항</h4>
+            <ul>
+                <li><strong>수도권:</strong> <strong>서울</strong>, <strong>인천</strong>, <strong>경기도</strong>는 인프라가 잘 갖춰져 있어 당일 설치도 가능할 수 있습니다.</li>
+                <li><strong>지방 대도시:</strong> <strong>부산</strong>, <strong>대구</strong>, <strong>광주</strong>, <strong>대전</strong> 등 광역시도 설치가 원활하나, 외곽 지역은 설치 스케줄을 미리 확인해야 합니다.</li>
+                <li><strong>도서산간 지역:</strong> <strong>울릉도</strong>, <strong>제주도</strong> 등 일부 지역은 KT 통신망 유무에 따라 설치가 제한되거나 <strong>추가 비용</strong>이 발생할 수 있으므로 <strong>가입 전</strong> 확인이 필수입니다.</li>
+            </ul>
+        </div>
+        <p>이사를 자주 하는 분들은 <strong>KT인터넷 무약정</strong> 서비스 가입 후 <strong>주소 변경</strong> 시에도 편리하게 이용할 수 있습니다. 단, 이사하는 지역에 따라 신규 설치가 필요한 경우 <strong>설치 비용</strong>이 부과될 수 있습니다.</p>
+    </section>
+
+    <section id="장점단점">
+      <h2>4. KT인터넷 무약정의 장단점 분석: 현명한 선택을 위한 가이드</h2>
+      <img src="https://images.pexels.com/photos/4386349/pexels-photo-4386349.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="손으로 긍정 부정 아이콘을 표시하는 모습" class="content-image">
+      <p>모든 상품에는 <strong>장점</strong>과 <strong>단점</strong>이 존재합니다. <strong>KT인터넷 무약정</strong> 서비스 역시 약정 상품과 비교했을 때 뚜렷한 <strong>장단점</strong>이 있습니다. <strong>신규 가입</strong>을 고려하는 소비자들은 이 <strong>차이점</strong>을 정확히 이해하고 본인의 사용 패턴에 맞는 상품을 선택해야 합니다. 무조건 <strong>저렴한곳</strong>만 찾기보다는 <strong>가성비</strong>를 따져봐야 합니다.</p>
+
+      <h3>KT인터넷 무약정의 뚜렷한 장점</h3>
+      <ul>
+        <li><strong>위약금 걱정 제로:</strong> 가장 핵심적인 장점입니다. 1년, 2년, 3년 약정 가입 시 중도 해지하면 남은 기간에 대한 위약금을 지불해야 하지만, 무약정은 <strong>해지 시점</strong>에 대한 부담이 전혀 없습니다.</li>
+        <li><strong>자유로운 이동성:</strong> <strong>잦은 이사</strong>(서울 포장이사, 전국 이사)를 하는 분들에게 최적의 조건입니다. 이사 후에도 부담 없이 해지하거나 주소 변경을 할 수 있습니다.</li>
+        <li><strong>상품 변경의 유연성:</strong> 인터넷 속도 변경, TV 결합 상품 전환 등을 약정 기간에 구애받지 않고 자유롭게 할 수 있습니다.</li>
+        <li><strong>단기 거주에 유리:</strong> 6개월~1년 미만 단기 거주자에게는 약정 할인 혜택보다 위약금 면제가 훨씬 이득입니다.</li>
+      </ul>
+
+      <h3>KT인터넷 무약정의 고려해야 할 단점</h3>
+      <ul>
+        <li><strong>월 요금 부담:</strong> 약정 할인을 받지 못하므로 월별 <strong>가격</strong>이 상대적으로 비쌉니다. 장기간 사용할 계획이라면 무약정이 손해일 수 있습니다.</li>
+        <li><strong>가입 시 혜택 축소:</strong> 일반 약정 상품 가입 시 받을 수 있는 고액의 <strong>현금지원</strong>, <strong>사은품</strong>, <strong>상품권</strong> <strong>이벤트</strong> 혜택이 무약정 상품에는 적용되지 않거나 소액으로 제공됩니다.</li>
+        <li><strong>결합 할인 불가:</strong> 휴대폰이나 다른 상품과 결합하여 받는 할인 혜택(예: KT 핸드폰 결합 할인)이 제한될 수 있습니다.</li>
+      </ul>
+      <p><strong>결론:</strong> <strong>KT인터넷 무약정</strong>은 단기 거주가 명확하거나, 위약금에 대한 부담이 가장 큰 요소인 소비자에게 <strong>추천</strong>됩니다. 3년 이상 장기 사용 예정이라면 <strong>가성비</strong> 측면에서 약정 상품 가입이 훨씬 유리합니다.</p>
+    </section>
+
+    <section id="고객후기">
+      <h2>5. 고객 자주 묻는 질문(FAQ) 및 2026년 가입 후기</h2>
+      <p>많은 고객들이 <strong>KT인터넷 무약정 가입</strong>을 망설이는 이유는 정보 부족 때문입니다. <strong>내돈내산 후기</strong>나 <strong>디시</strong>(DCC) 등 커뮤니티에서 자주 언급되는 궁금증을 모아 정리했습니다. 2026년 최신 정보를 바탕으로 고객님들의 궁금증을 해소해 드립니다.</p>
+      
+      <h3>KT인터넷 무약정 FAQ (자주 묻는 질문)</h3>
+      <dl>
+        <dt tabindex="0" aria-expanded="false">Q1: KT인터넷 무약정은 <strong>가격</strong>이 왜 약정 상품보다 비싼가요?</dt>
+        <dd>A: 약정 상품은 일정 기간 사용을 약속하는 대가로 통신사로부터 할인 혜택을 받는 구조입니다. 무약정 상품은 약정이 없기 때문에 이러한 할인이 적용되지 않아 정가 요금이 부과됩니다.</dd>
+        <dt tabindex="0" aria-expanded="false">Q2: 무약정으로 <strong>가입</strong> 시에도 <strong>현금지원</strong>이나 <strong>사은품</strong>을 받을 수 있나요?</dt>
+        <dd>A: 일반 약정 가입만큼의 고액 혜택은 어렵지만, 일부 대리점에서 소액의 <strong>사은품</strong>이나 <strong>상품권</strong> 혜택을 제공하는 경우가 있습니다. <strong>신규 가입</strong> 시 <strong>이벤트</strong>를 확인해 보세요.</dd>
+        <dt tabindex="0" aria-expanded="false">Q3: 무약정으로 사용하다가 나중에 약정으로 전환할 수 있나요?</dt>
+        <dd>A: 네, 가능합니다. 무약정 기간 중에도 언제든지 1년, 2년, 3년 약정으로 전환할 수 있습니다. 약정 전환 시점부터 할인된 요금이 적용됩니다. 단, 약정 기간이 시작되므로 중도 해지 시 위약금이 발생합니다.</dd>
+        <dt tabindex="0" aria-expanded="false">Q4: <strong>KT인터넷 무약정</strong> 서비스도 <strong>AI</strong> 기능이 탑재된 기가 지니(Giga Genie)를 사용할 수 있나요?</dt>
+        <dd>A: <strong>AI</strong> 스피커 결합 서비스는 일반적으로 약정 상품과 함께 제공됩니다. 무약정으로 <strong>AI</strong> 서비스를 이용하려면 별도 기기 임대료가 발생하거나 서비스 이용료를 추가 납부해야 할 수 있습니다.</dd>
+        <dt tabindex="0" aria-expanded="false">Q5: <strong>유튜브</strong>, <strong>네이버</strong>, <strong>구글</strong> 등에서 KT인터넷 <strong>후기</strong>를 많이 찾아봤는데, 어떤 곳이 믿을 수 있나요?</dt>
+        <dd>A: 최근 <strong>유튜브</strong>, <strong>블로그</strong>, <strong>인스타그램</strong> 등에서 허위 <strong>광고</strong>가 많으니 주의해야 합니다. 공식 <strong>전문 업체</strong>의 <strong>후기</strong>나 공정거래위원회, 한국소비자원의 정보를 참고하는 것이 좋습니다. <strong>내돈내산</strong> 리뷰는 참고용으로만 활용하세요.</dd>
+      </dl>
+
+      <div class="highlight-box">
+          <h4>2026년 KT인터넷 무약정 고객 후기 요약</h4>
+          <p><em>"저는 서울 영등포구 원룸에 1년만 거주할 예정이라 무약정으로 신청했습니다. 약정 상품보다 월 1만원 정도 비쌌지만, 1년 뒤 해지 시 위약금이 없어서 마음 편하게 사용했습니다. 잦은 이사가 예상되는 분께는 최고의 선택인 것 같아요."</em> - 김OO 고객 (서울 영등포구)</p>
+          <p><em>"무약정 가입 시 <strong>현금지원</strong>은 기대하지 않았는데, 상담사분이 소액의 상품권을 챙겨주셔서 기분 좋게 <strong>가입</strong>했습니다. <strong>KT인터넷</strong>은 전국 어디서든 안정적이어서 만족합니다."</em> - 박OO 고객 (부산 해운대구)</p>
+          <p><em>"약정 상품과 <strong>무약정</strong> 상품을 <strong>비교</strong>해 봤는데, <strong>가격</strong> <strong>차이점</strong>이 꽤 있었습니다. 하지만 단기로 사용할 거라 무약정으로 결정했고, 해지할 때 위약금 없이 깔끔하게 처리되어 좋습니다."</em> - 최OO 고객 (경기도 수원시)</p>
+      </div>
+
+    </section>
+
+    <section id="가입문의">
+      <h2>6. KT인터넷 무약정 가입 및 문의 안내</h2>
+      <p><strong>KT인터넷 무약정</strong> 서비스 가입은 <strong>전국 지역</strong> 어디서나 가능합니다. <strong>신규 가입</strong>을 원하시거나 <strong>요금</strong>, <strong>혜택</strong>, <strong>설치 가능 여부</strong>에 대한 <strong>견적</strong>을 받고 싶으시면 아래 연락처 또는 문의 양식을 통해 문의해 주세요. <strong>전문 업체</strong> 상담사가 2026년 최신 정보를 바탕으로 친절하게 안내해 드립니다.</p>
+
+      <div class="highlight-box">
+        <h4>상담 및 가입 안내</h4>
+        <ul>
+          <li><strong>전화 상담:</strong> 02-123-4567 (평일 9:00~18:00)</li>
+          <li><strong>온라인 문의:</strong> <a href="https://yourdomain.com/contact" target="_blank">온라인 문의하기</a> (24시간 접수)</li>
+          <li><strong>이메일 문의:</strong> info@kt-internet-no-contract.kr</li>
+          <li><strong>네이버 톡톡 상담:</strong> <a href="https://talk.naver.com">네이버 톡톡 상담하기</a></li>
+        </ul>
+        <a href="https://yourdomain.com/contact" class="cta-button">무약정 견적 신청하기</a>
+      </div>
+    </section>
+
+    <section id="신뢰성정보">
+      <h2>7. 공식 정보 및 신뢰할 수 있는 참고자료</h2>
+      <p><strong>KT인터넷 무약정</strong> 서비스 가입 시 소비자 피해를 예방하고 정확한 정보를 얻기 위해 공인된 기관의 정보를 확인하는 것이 중요합니다. 아래는 인터넷 서비스 및 소비자 보호와 관련된 신뢰성 있는 외부 사이트입니다.</p>
+      <ul>
+        <li><a href="https://www.msit.go.kr" target="_blank" rel="noopener">과학기술정보통신부 – 통신 서비스 정책 및 고지</a></li>
+        <li><a href="https://www.kcc.go.kr" target="_blank" rel="noopener">방송통신위원회 – 통신 서비스 이용 관련 가이드라인</a></li>
+        <li><a href="https://www.consumer.go.kr" target="_blank" rel="noopener">한국소비자원 – 통신사 서비스 관련 소비자 피해 예방 정보</a></li>
+        <li><a href="https://www.kto.or.kr" target="_blank" rel="noopener">한국통신사업자연합회(KTOA) – 통신 관련 정보 제공</a></li>
+        <li><a href="https://ko.wikipedia.org/wiki/KT" target="_blank" rel="noopener">위키피디아 – KT 기업 및 서비스 정보</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- FAQ 아코디언 기능 활성화 스크립트 -->
+  <script>
+    document.querySelectorAll('dl dt').forEach((dt) => {
+      dt.addEventListener('click', () => {
+        const expanded = dt.getAttribute('aria-expanded') === 'true';
+        dt.setAttribute('aria-expanded', !expanded);
+        dt.classList.toggle('active');
+      });
+      dt.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          dt.click();
+        }
+      });
+    });
+  </script>
+  
